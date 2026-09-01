@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baisi Rajab Isabirye — Computer Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B2B;
+    --paper:#F6F5F1;
+    --teal:#1FA98F;
+    --teal-dim:#16786A;
+    --slate:#495568;
+    --slate2:#5B6B82;
+    --amber:#E8B04B;
+    --line:#D9D6CC;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk', sans-serif;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 32px;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(246,245,241,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1040px; margin:0 auto; padding:18px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-mark{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:1.05rem;}
+  .nav-mark span{color:var(--teal);}
+  .nav-links{display:flex; gap:28px; font-size:0.92rem; color:var(--slate2);}
+  .nav-links a:hover{color:var(--teal-dim);}
+  @media (max-width:640px){ .nav-links{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:96px 0 88px;
+    overflow:hidden;
+  }
+  .hero-route{
+    position:absolute; inset:0; z-index:0; opacity:0.9;
+    pointer-events:none;
+  }
+  .hero-inner{position:relative; z-index:1;}
+  .eyebrow-row{
+    display:flex; align-items:center; gap:10px; margin-bottom:22px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.82rem; color:var(--slate2);
+  }
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--teal); display:inline-block;
+       box-shadow:0 0 0 4px rgba(31,169,143,0.15);}
+  h1.title{
+    font-size:clamp(2.4rem, 5.4vw, 4rem);
+    font-weight:600;
+    line-height:1.04;
+    max-width:15ch;
+  }
+  .role{
+    margin-top:20px; font-size:1.15rem; color:var(--slate2); max-width:42ch;
+  }
+  .hero-meta{
+    margin-top:40px; display:flex; flex-wrap:wrap; gap:28px 40px;
+  }
+  .hero-meta div{font-size:0.86rem; color:var(--slate2);}
+  .hero-meta strong{
+    display:block; font-family:'Space Grotesk',sans-serif; color:var(--ink);
+    font-size:1rem; font-weight:600; margin-bottom:2px;
+  }
+  .cta-row{margin-top:44px; display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block; padding:12px 22px; border-radius:2px;
+    font-size:0.92rem; font-weight:500; border:1px solid var(--ink);
+  }
+  .btn-solid{background:var(--ink); color:var(--paper);}
+  .btn-solid:hover{background:var(--teal-dim); border-color:var(--teal-dim);}
+  .btn-outline{border:1px solid var(--slate); color:var(--ink);}
+  .btn-outline:hover{border-color:var(--ink);}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:76px 0;}
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:44px; border-bottom:1px solid var(--line); padding-bottom:18px;
+  }
+  .section-head h2{font-size:1.7rem; font-weight:600;}
+  .section-num{font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--slate2);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px;}
+  .about-grid p{color:var(--slate2); font-size:1.02rem; margin-bottom:16px; max-width:56ch;}
+  .about-grid p strong{color:var(--ink);}
+  .skill-list{list-style:none;}
+  .skill-list li{
+    padding:12px 0; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; font-size:0.94rem;
+  }
+  .skill-list li:first-child{padding-top:0;}
+  .skill-list span.tag{color:var(--teal-dim); font-family:'IBM Plex Mono',monospace; font-size:0.78rem;}
+  @media (max-width:760px){ .about-grid{grid-template-columns:1fr;} }
+
+  /* ---------- EXPERIENCE (route line) ---------- */
+  .route{position:relative; padding-left:34px;}
+  .route::before{
+    content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px;
+    background:linear-gradient(var(--teal), var(--line));
+  }
+  .stop{position:relative; padding-bottom:46px;}
+  .stop:last-child{padding-bottom:0;}
+  .stop::before{
+    content:""; position:absolute; left:-34px; top:4px; width:12px; height:12px;
+    border-radius:50%; background:var(--paper); border:2px solid var(--teal);
+  }
+  .stop.current::before{background:var(--teal);}
+  .stop-head{
+    display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px 18px;
+  }
+  .stop-head h3{font-size:1.12rem; font-weight:600;}
+  .stop-when{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--slate2); white-space:nowrap;}
+  .stop-org{color:var(--teal-dim); font-size:0.92rem; margin-top:3px; font-weight:500;}
+  .stop-body{color:var(--slate2); margin-top:10px; font-size:0.96rem; max-width:64ch;}
+  .stop-badge{
+    display:inline-block; margin-top:12px; font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem; color:var(--teal-dim); border:1px solid var(--teal); border-radius:2px;
+    padding:3px 8px;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px;}
+  .proj-card{
+    background:var(--card); border:1px solid var(--line); padding:26px;
+    display:flex; flex-direction:column; gap:14px; transition:border-color .15s ease, transform .15s ease;
+  }
+  .proj-card:hover{border-color:var(--teal); transform:translateY(-2px);}
+  .proj-top{display:flex; justify-content:space-between; align-items:flex-start;}
+  .proj-top h3{font-size:1.05rem; font-weight:600;}
+  .proj-idx{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--slate2);}
+  .proj-card p{color:var(--slate2); font-size:0.92rem;}
+  .stack-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto;}
+  .stack-chip{
+    font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--ink);
+    background:var(--paper); border:1px solid var(--line); padding:3px 8px; border-radius:2px;
+  }
+  .proj-link{font-size:0.84rem; color:var(--teal-dim); font-weight:500; margin-top:4px;}
+  .proj-link:hover{color:var(--ink);}
+  @media (max-width:760px){ .proj-grid{grid-template-columns:1fr;} }
+
+  /* ---------- EDUCATION / CERTS ---------- */
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:56px;}
+  .edu-item{padding:18px 0; border-bottom:1px solid var(--line);}
+  .edu-item:last-child{border-bottom:none;}
+  .edu-item h3{font-size:1rem; font-weight:600;}
+  .edu-item .org{color:var(--slate2); font-size:0.9rem; margin-top:3px;}
+  .edu-item .yr{font-family:'IBM Plex Mono',monospace; font-size:0.76rem; color:var(--teal-dim); margin-top:5px; display:block;}
+  @media (max-width:760px){ .two-col{grid-template-columns:1fr;} }
+
+  /* ---------- CONTACT ---------- */
+  .contact-panel{
+    background:var(--ink); color:var(--paper); padding:64px 48px; border-radius:2px;
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px;
+  }
+  .contact-panel h2{color:var(--paper); font-size:2rem; max-width:16ch;}
+  .contact-links{display:flex; flex-direction:column; gap:10px; font-size:0.95rem;}
+  .contact-links a{color:var(--paper); border-bottom:1px solid rgba(246,245,241,0.25); padding-bottom:2px;}
+  .contact-links a:hover{border-color:var(--teal);}
+  .contact-links .lbl{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--teal); display:block; margin-bottom:2px;}
+
+  footer{padding:36px 0 60px; text-align:center; color:var(--slate2); font-size:0.82rem;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-mark">BAISI<span>.</span>RAJAB</div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <svg class="hero-route" viewBox="0 0 1040 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M -20 340 C 180 340, 220 120, 420 120 S 660 300, 860 260 S 1000 60, 1080 60"
+          fill="none" stroke="#1FA98F" stroke-width="1.4" stroke-opacity="0.35" stroke-dasharray="2 8" stroke-linecap="round"/>
+    <circle cx="420" cy="120" r="3.2" fill="#1FA98F" opacity="0.55"/>
+    <circle cx="860" cy="260" r="3.2" fill="#1FA98F" opacity="0.55"/>
+    <circle cx="1080" cy="60" r="3.2" fill="#E8B04B" opacity="0.6"/>
+  </svg>
+  <div class="wrap hero-inner">
+    <div class="eyebrow-row"><span class="dot"></span> Kampala, Uganda — available for new work</div>
+    <h1 class="title">Systems that keep data, devices, and decisions in sync.</h1>
+    <p class="role">I'm Baisi Rajab Isabirye, a computer scientist working across data science, networked systems, and web platforms — currently building the intelligence layer behind healthcare data and transport monitoring in Kampala.</p>
+    <div class="hero-meta">
+      <div><strong>6</strong>years across networking, ML &amp; web</div>
+      <div><strong>2</strong>hospitals running my data systems</div>
+      <div><strong>B.Sc.</strong>Computer Science, Makerere University</div>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-solid" href="#projects">See the projects</a>
+      <a class="btn btn-outline" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head"><h2>About</h2><span class="section-num">01 / profile</span></div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a <strong>computer scientist</strong> based in Kireka, Kampala, who moves comfortably between three worlds: <strong>data science</strong> (building and shipping ML models), <strong>infrastructure</strong> (networking, systems administration, device configuration), and <strong>web development</strong> (designing and maintaining the sites that sit on top of it all).</p>
+        <p>I consider myself a responsible and orderly person, comfortable working inside a project team, with good communication and listening skills. Most of my recent work has been in production environments — configuring live systems for hospitals and a security firm's transport-monitoring platform — rather than in the classroom, and I'm looking to keep growing that hands-on experience.</p>
+      </div>
+      <ul class="skill-list">
+        <li>Data Analysis &amp; Machine Learning <span class="tag">PYTHON</span></li>
+        <li>Databases &amp; Systems Administration <span class="tag">SYSADMIN</span></li>
+        <li>Networking &amp; Device Configuration <span class="tag">CISCO</span></li>
+        <li>Web Development <span class="tag">HTML / CSS / JS</span></li>
+        <li>Communication &amp; Customer Service <span class="tag">SOFT SKILL</span></li>
+        <li>Transparency &amp; Reliability <span class="tag">SOFT SKILL</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head"><h2>Experience</h2><span class="section-num">02 / route</span></div>
+    <div class="route">
+
+      <div class="stop current">
+        <div class="stop-head">
+          <h3>Senior IT Specialist</h3>
+          <span class="stop-when">JAN 2020 — PRESENT</span>
+        </div>
+        <div class="stop-org">Lifemate Medical &amp; Diagnostic Centre and Prime Health Medical &amp; Diagnostic Centre</div>
+        <p class="stop-body">Serving as Senior IT Specialist across two hospitals at once, specializing in data analysis, data science / machine learning, database management, and website development for both facilities.</p>
+        <span class="stop-badge">CURRENT ROLE</span>
+      </div>
+
+      <div class="stop">
+        <div class="stop-head">
+          <h3>Programming Officer</h3>
+          <span class="stop-when">DEC 2024 — JUN 2026</span>
+        </div>
+        <div class="stop-org">Virtus Global Security — Production Department</div>
+        <p class="stop-body">Worked within the production team on the Intelligent Transport Monitoring System (ITMS), configuring, programming, and confirming all required field devices.</p>
+      </div>
+
+      <div class="stop">
+        <div class="stop-head">
+          <h3>IT Officer</h3>
+          <span class="stop-when">DEC 2023 — JUN 2024</span>
+        </div>
+        <div class="stop-org">M.D &amp; Lothbrok</div>
+        <p class="stop-body">Configured computer systems and devices, and designed and updated websites for both M.D &amp; Lothbrok and Platinum Agency Security. Built a model analysing and predicting income generation for both companies.</p>
+      </div>
+
+      <div class="stop">
+        <div class="stop-head">
+          <h3>Machine Learning — Final Year Project</h3>
+          <span class="stop-when">OCT 2022 — AUG 2023</span>
+        </div>
+        <div class="stop-org">Makerere University</div>
+        <p class="stop-body">Built a machine learning model predicting trends in flight ticket prices, as a final-year project.</p>
+      </div>
+
+      <div class="stop">
+        <div class="stop-head">
+          <h3>Web Development &amp; Systems Administration</h3>
+          <span class="stop-when">MAY — AUG 2022</span>
+        </div>
+        <div class="stop-org">Stratcom Communications Computer Solutions Ltd — Internship</div>
+        <p class="stop-body">Designed a cafe coffee website using HTML, CSS, and JavaScript, and routed all networking devices during the internship. Completed hands-on training in networking, web apps, computer repair, and Cisco practicals.</p>
+      </div>
+
+      <div class="stop">
+        <div class="stop-head">
+          <h3>Application Development</h3>
+          <span class="stop-when">JUN — JUL 2021</span>
+        </div>
+        <div class="stop-org">Team project — recess term</div>
+        <p class="stop-body">Built a bus transport application with a team of four during the university recess term.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head"><h2>Selected projects</h2><span class="section-num">03 / github</span></div>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-top"><h3>SmartFlow Irrigation</h3><span class="proj-idx">01</span></div>
+        <p>A smart irrigation system that monitors field or soil conditions and automates watering decisions, aimed at cutting water waste and reducing manual monitoring for small-scale growers.</p>
+        <div class="stack-row">
+          <span class="stack-chip">Python</span><span class="stack-chip">Sensors / IoT</span><span class="stack-chip">Automation</span>
+        </div>
+        <a class="proj-link" href="#">View on GitHub →</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top"><h3>Weather Prediction</h3><span class="proj-idx">02</span></div>
+        <p>A machine learning model trained on historical weather data to forecast upcoming conditions, applying the same data-science workflow he uses professionally to a public dataset.</p>
+        <div class="stack-row">
+          <span class="stack-chip">Python</span><span class="stack-chip">Machine Learning</span><span class="stack-chip">Pandas</span>
+        </div>
+        <a class="proj-link" href="#">View on GitHub →</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top"><h3>Flight Price Prediction</h3><span class="proj-idx">03</span></div>
+        <p>Started as his university final-year project — a model that predicts trends in flight ticket prices from historical fare data, later refined as a standalone repository.</p>
+        <div class="stack-row">
+          <span class="stack-chip">Python</span><span class="stack-chip">Regression</span><span class="stack-chip">scikit-learn</span>
+        </div>
+        <a class="proj-link" href="#">View on GitHub →</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top"><h3>Family Tree System</h3><span class="proj-idx">04</span></div>
+        <p>A system for recording and visualising family lineage and relationships, letting a family record members, generations, and connections in one structured place.</p>
+        <div class="stack-row">
+          <span class="stack-chip">Database Design</span><span class="stack-chip">Web App</span>
+        </div>
+        <a class="proj-link" href="#">View on GitHub →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head"><h2>Education &amp; Certifications</h2><span class="section-num">04 / record</span></div>
+    <div class="two-col">
+      <div>
+        <h3 class="mono" style="font-size:0.78rem; color:var(--slate2); margin-bottom:12px; text-transform:none;">Education</h3>
+        <div class="edu-item">
+          <h3>Bachelor of Computer Science</h3>
+          <div class="org">Makerere University</div>
+          <span class="yr">2020 — 2023</span>
+        </div>
+        <div class="edu-item">
+          <h3>Uganda Advanced Certificate of Education</h3>
+          <div class="org">Gombe Secondary School</div>
+          <span class="yr">2017 — 2019</span>
+        </div>
+        <div class="edu-item">
+          <h3>Uganda Certificate of Education</h3>
+          <div class="org">Kibuli Secondary School</div>
+          <span class="yr">2013 — 2016</span>
+        </div>
+      </div>
+      <div>
+        <h3 class="mono" style="font-size:0.78rem; color:var(--slate2); margin-bottom:12px; text-transform:none;">Certifications</h3>
+        <div class="edu-item">
+          <h3>Stratcom Certificate of Completion</h3>
+          <div class="org">Networking &amp; Systems Administration, Web Apps Development, Computer Repair &amp; Software Maintenance, Cisco Practicals</div>
+          <span class="yr">Stratcom Communications Computer Solutions Ltd</span>
+        </div>
+        <div class="edu-item">
+          <h3>Intro to Programming</h3>
+          <div class="org">Kaggle</div>
+          <span class="yr">Jan 2024</span>
+        </div>
+        <div class="edu-item">
+          <h3>Python</h3>
+          <div class="org">Kaggle</div>
+          <span class="yr">Apr 2024</span>
+        </div>
+        <div class="edu-item">
+          <h3>Intro to Machine Learning</h3>
+          <div class="org">Kaggle</div>
+          <span class="yr">Jun 2024</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-panel">
+      <h2>Let's build something that stays online.</h2>
+      <div class="contact-links">
+        <a href="mailto:baisirajab13268@gmail.com"><span class="lbl">EMAIL</span>baisirajab13268@gmail.com</a>
+        <a href="tel:+256701885310"><span class="lbl">PHONE</span>+256 701 885 310</a>
+        <a href="https://www.linkedin.com/in/baisi-rajab-lsabirye-2a497123a" target="_blank" rel="noopener"><span class="lbl">LINKEDIN</span>linkedin.com/in/baisi-rajab-lsabirye</a>
+        <a href="#"><span class="lbl">LOCATION</span>Kireka–Kamuli Road, Banda, Kampala</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Baisi Rajab Isabirye — Portfolio, 2026</footer>
+
+</body>
+</html>
